@@ -1,0 +1,138 @@
+<extend name="Public/base" />
+<block name="mylink">
+    <link href="__PUBLIC__/Admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+</block>
+<block name="content">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row-fluid fl" id="main">
+            <div class="tableBox">
+                <div class="ibox-title">
+                    <h5>商城管理 <small>商品管理</small></h5>
+                    <div class="ibox-tools">
+                        <i class="fa fa-user-plus"></i>
+                        <a href="{{:U('goodsAdd')}}">添加商品</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    商品ID
+                                </th>
+                                <th>
+                                    商品分类
+                                </th>
+                                <th>
+                                    商品名称
+                                </th>
+                                <th>
+                                    商品图片
+                                </th>
+                                <th>
+                                    商品描述
+                                </th>
+                                <th>
+                                    商品属性
+                                </th>
+                                <th>
+                                    商品参数
+                                </th>
+                                <th>
+                                    商品单价
+                                </th>
+                                <th>
+                                    商品库存
+                                </th>
+                                <th>
+                                    商品状态
+                                </th>
+                                <th>
+                                    添加时间
+                                </th>
+                                <th>
+                                    更新时间
+                                </th>
+                                <th>
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <volist name="data" id="v">
+                                <tr>
+                                    <td>
+                                        {{$i}}
+                                    </td>
+                                    <td>
+                                        {{$v['cname']}}
+                                    </td>
+                                    <td>
+                                        {{$v['name']}}
+                                    </td>
+                                    <td>
+                                        <empty name="v.pic'">
+                                            <a class="btn btn-white" href="javascript:;" goodsTitle="{{$v['name']}}" onclick="addpic(this)">添加图片</a>
+                                        <else />
+                                            <img src="__PUBLIC__/{{$v['pic']}}">
+                                        </empty>
+                                    </td>
+                                    <td>
+                                        <empty name="v.desc'">
+                                            <a class="btn btn-white" href="javascript:;">添加描述</a>
+                                        <else />
+                                            {{$v['desc']}}
+                                        </empty>
+                                    </td>
+                                    <td>
+                                        {{$v['attr']}}
+                                    </td>
+                                    <td>
+                                        <empty name="v.attr'">
+                                            <a class="btn btn-white" href="javascript:;">添加参数</a>
+                                        <else />
+                                            {{$v['val']}}
+                                        </empty>
+                                    </td>
+                                    <td>
+                                        {{$v['price']}}
+                                    </td>
+                                    <td>
+                                        {{$v['stock']}}
+                                    </td>
+                                    <td>
+                                        <switch name="v.status">
+                                            <case value="1">上架</case>
+                                            <case value="0">下架</case>
+                                        </switch>
+                                    </td>
+                                    <td>
+                                        {{$v['addtime']|date='Y-m-d H:i:s',###}}
+                                    </td>
+                                    <td>
+                                        {{$v['updatetime']|date='Y-m-d H:i:s',###}}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-outline btn-success" href="javascript:;" ruleId="{{$v['id']}}" ruleName="{{$v['name']}}" ruleTitle="{{$v['pid']}}"
+                                            onclick="edit(this)">
+                                                更新
+                                            </a>
+                                            <a class="btn btn-outline btn-success deletBnt" ruleId="{{$v['id']}}">
+                                                删除
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </volist>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</block>
